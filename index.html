@@ -20,14 +20,14 @@
         <img src="images/logo_dark.png" alt="logo" class="w-28 cursor-pointer mr-14 hidden dark:block"> -->
 
                     <!-- Light Mode Text -->
-            <span class="text-black dark:hidden w-28 cursor-pointer mr-14 text-2xl">SahanGunathunga</span>
+            <span class="text-black dark:hidden w-28 cursor-pointer text-2xl">SahanGunathunga</span>
             
             <!-- Dark Mode Text -->
-            <span class="hidden dark:inline text-white w-28 cursor-pointer mr-14 text-2xl">SahanGunathunga</span>
+            <span class="hidden dark:inline text-white w-28 cursor-pointer text-2xl">SahanGunathunga</span>
 
         <!-- Navigation Links -->
-        <ul class="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50 font-Ovo
-        dark:border dark:border-white/50 dark:bg-transparent">
+        <ul class="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-6 py-2 bg-white shadow-sm bg-opacity-50 font-Ovo
+        dark:border dark:border-white/50 dark:bg-transparent absolute left-1/2 transform -translate-x-1/2 w-max">
             <li><a href="#top">Home</a></li>
             <li><a href="#about">About</a></li>
             <!-- <li><a href="#services">Services</a></li> -->
@@ -58,30 +58,31 @@
         </div>
 <!---------------------------------------mobile menu--------------------------------------->
 
-<ul id="sideMenu" class = "flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 font-Ovo dark:bg-darkHover dark:text-white">            
+        <ul id="sideMenu" class = "flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 font-Ovo dark:bg-darkHover dark:text-white">            
 
-    <div class="absolute right-6 top-6" >
-        <img src="./images/close-black.png" alt="" class="w-5 cursor-pointer dark:hidden" onclick="closeMenu()">
-        <img src="./images/close-white.png" alt="" class="w-5 cursor-pointer hidden dark:block" onclick="closeMenu()">
-    </div>
+            <div class="absolute right-6 top-6" >
+                <img src="./images/close-black.png" alt="" class="w-5 cursor-pointer dark:hidden" onclick="closeMenu()">
+                <img src="./images/close-white.png" alt="" class="w-5 cursor-pointer hidden dark:block" onclick="closeMenu()">
+            </div>
 
-    <li><a href="#top" onclick="closeMenu()">Home</a></li>
-    <li><a href="#about" onclick="closeMenu()">About</a></li>
-    <!-- <li><a href="#services" onclick="closeMenu()">Services</a></li> -->
-    <li><a href="#work" onclick="closeMenu()">My Work</a></li>
-    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-    
-</ul>
+            <li><a href="#top" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <!-- <li><a href="#services" onclick="closeMenu()">Services</a></li> -->
+            <li><a href="#work" onclick="closeMenu()">My Work</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            
+        </ul>
     </nav>
 
 
 
 <!---------------------------------------header--------------------------------------->
-<div class = "w-11/12 max-w-3xl mx-auto text-center h-screen flex flex-col items-center justify-center gap-4">
-    <img src="./images/profile-img.png" alt="" class="rounded-full w-32">
-    <h3 class = "flex items-end gap-2 text-xl md:text-2xl font-Ovo">Hi! I'm Sahan Dilip <img src ="./images/hand-icon.png" alt="" class="W-6"></h3>
-    <h1 class="text-3xl sm:text-6xl lg:text-[66px] font-Ovo">Full Stack Web Developer </h1>
-    <p class="max-w-2xl mx-auto font-Ovo">I design and develop modern web and mobile applications with seamless user experiences, blending captivating front-end designs with robust back-end architectures. </p>
+<div class = "w-11/12 max-w-3xl mx-auto text-center h-screen flex flex-col items-center justify-center gap-4 ">
+    <img src="./images/profile-img.png" alt="" class="rounded-full w-32 mt-8">
+    <h3 class = "flex items-end gap-2 text-xl md:text-2xl font-Ovo">Hi! I'm Sahan Gunathunga <img src ="./images/hand-icon.png" alt="" class="W-6"></h3>
+    <h3 class="text-3xl sm:text-5xl lg:text-[42px] font-Ovo truncate">Full Stack Developer, DevOps/Agentic AI Practitioner</h3>
+    <p class="max-w-2xl mx-auto font-Ovo">I develop high-quality web and mobile applications with clean design and scalable architecture.  
+  I'm exploring DevOps and the emerging world of agentic AI—building systems that can reason, plan, and act autonomously to solve complex tasks. </p>
 
 
     <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
@@ -104,14 +105,14 @@
 <!---------------------------------------about--------------------------------------->
 
 
-<div id="about" class="w-full px-[12%] py-10 scroll-mt-20">
-    <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4>
+<div id="about" class="w-full px-[8%] py-6 scroll-mt-20">
+    <!-- <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4> -->
     <h2 class="text-center text-5xl font-Ovo">About me</h2>
 
-    <div class="flex w-full flex-col lg:flex-row items-center gap-20 mb-5 mt-2">
+    <div class="flex w-full flex-col lg:flex-row items-center gap-8 mb-4 mt-0">
         <!-- Image Section -->
         <div class="max-w-max mx-auto relative">
-            <img src="./images/user-image.png" class="w-64 sm:w-80 rounded-3xl max-w-none" alt="User Image">
+            <img src="./images/user-image2.png" class="w-48 sm:w-64 rounded-3xl max-w-none" alt="User Image">
 
             <div class="bg-white w-1/2 aspect-square absolute right-0 bottom-0 rounded-full translate-x-1/4 translate-y-1/3 shadow-[0_4px_55px_rgba(149,0,162,0.15)] flex items-center justify-center">
 
@@ -125,10 +126,10 @@
 
         <!-- Text Section -->
         <div class="flex-1">
-            <p class="mb-10 max-w-2xl font-Ovo">
-                I am an ambitious and dedicated undergraduate with a strong passion for technology and innovation. Equipped with excellent self-management skills and the ability to adapt effectively under pressure, I am eager to contribute my knowledge and skills to real-world challenges. With a proactive approach and a commitment to excellence, I aim to make meaningful contributions to the industry and society.
+            <p class="mb-4 max-w-4xl font-Ovo">
+                I am an ambitious and dedicated final year undergraduate of Department of Computer Science & Engineering with a strong passion for technology and innovation. Equipped with excellent self-management skills and the ability to adapt effectively under pressure, I am eager to contribute my knowledge and skills to real-world challenges. With a proactive approach and a commitment to excellence, I aim to make meaningful contributions to the industry and society.
 
-            <ul class="grid grid-cols-1 sm:grid-cols-auto gap-6 max-w-2xl">
+            <!-- <ul class="grid grid-cols-1 sm:grid-cols-auto gap-6 max-w-2xl">
 
                 <li class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover hover:-translate-y-1 hover:shadow-black 
                 dark:border-white dark:hover:shadow-white dark:hover:bg-darkHover/50">
@@ -152,67 +153,60 @@
                     <h3 class="my-4 font-semibold text-gray-700 dark:text-white">Languages</h3>
                     <p class="text-gray-600 dark:text-white/80 text-sm">Python, Java, C++, SQL</p>
                 </li>
-            </ul>
+            </ul> -->
 
             <h4 class="my-1 text-gray-700 font-Ovo dark:text-white/80">Tools i use</h4>
-
+            
             <ul class="flex items-center gap-3 sm:gap-5">
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/python-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/react-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/mongodb.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/figma.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/git.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/postgresql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/nodejs-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/mysql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/kubernetes-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/javascript-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                
-            </ul>
-            <ul class="flex items-center gap-3 sm:gap-5 mt-5">
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/java-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/html5-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/vscode.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/docker-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/css3-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/spring-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/langchain-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/c++-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/mysql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/postgresql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/docker-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/react-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/nextjs-original.png" alt="Next js Icon" class="w-5 sm:w-7">
+                </li>
+            </ul>
+            <ul class="flex items-center gap-3 sm:gap-5 mt-5">
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/javascript-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/html5-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/css3-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/angularjs-plain.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/tailwindcss-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                    <img src="./images/mongodb.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/kubernetes-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/amazonwebservices-original-wordmark.png" alt="VS Code Icon" class="w-5 sm:w-7">
@@ -220,7 +214,9 @@
                 <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
                     <img src="./images/c-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
                 </li>
-                
+                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
+                    <img src="./images/git.png" alt="VS Code Icon" class="w-5 sm:w-7">
+                </li>
             </ul>
             
         </div>
@@ -274,56 +270,47 @@
 <!---------------------------------------my work--------------------------------------->
 
 <div id="work" class="w-full px-[12%] py-10 scroll-mt-20 dark:text-white">
-    <h4 class="text-center mb-2 text-lg font-Ovo">My portfolio</h4>
+    <!-- <h4 class="text-center mb-2 text-lg font-Ovo">My portfolio</h4> -->
     <h2 class="text-center text-5xl font-Ovo">My Latest Work</h2>
 
-    <p class="text-center max-w-2xl mx-auto mt-5 mb-12">I am a passionate and experienced Full Stack Web Developer with a proven track record of working on several projects that span both frontend and backend development.< I have worked with a wide range of modern technologies and frameworks. I have hands-on experience databases to deliver efficient and scalable solutions.</p>
+    <p class="text-center max-w-2xl mx-auto mt-5 mb-12">I have worked with a wide range of modern technologies and frameworks. I have hands-on experience databases to deliver efficient and scalable solutions.</p>
 
          <div class="grid grid-cols-auto my-10 gap-5">
-            <div class="aspect-square bg-[url('./images/work-1.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group">
-                <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+            <button type="button" data-project="orphanage" class="group block text-left">
+                <div class="aspect-square bg-[url('./images/work-1.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
+                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
                     <div>
-                        <h2 class="font-semibold dark:text-black font-Ovo" style="line-height: 1.5;">Orphanage Management System for NCPA</h2>
-                        <p class="text-sm text-gray-700">Web Design</p>
-                    </div>
-                    <div class=" border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-                        <img src="./images/send-icon.png" alt="Eye Icon" class="w-5">
+                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Orphanage Management System for NCPA</h2>
                     </div>
                 </div>
-            </div>
-            <div class="aspect-square bg-[url('./images/work-2.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group">
-                <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+            </button>
+
+            <button type="button" data-project="ecommerce" class="group block text-left">
+                <div class="aspect-square bg-[url('./images/work-2.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
+                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
                     <div>
-                        <h2 class="font-semibold dark:text-black font-Ovo" style="line-height: 1.5;" style="line-height: 1.5;">E-Commerce Platform</h2>
-                        <p class="text-sm text-gray-700">Web Design</p>
-                    </div>
-                    <div class=" border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-                        <img src="./images/send-icon.png" alt="Eye Icon" class="w-5">
+                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">E-Commerce Platform for Food Company</h2>
                     </div>
                 </div>
-            </div>
-            <div class="aspect-square bg-[url('./images/work-3.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group">
-                <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+            </button>
+
+            <button type="button" data-project="hrms" class="group block text-left">
+                <div class="aspect-square bg-[url('./images/work-3.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
+                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
                     <div>
-                        <h2 class="font-semibold dark:text-black font-Ovo" style="line-height: 1.5;">Human Resource Management System</h2>
-                        <p class="text-sm text-gray-700">Web Design</p>
-                    </div>
-                    <div class=" border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-                        <img src="./images/send-icon.png" alt="Eye Icon" class="w-5">
+                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Human Resource Management System</h2>
                     </div>
                 </div>
-            </div>
-            <div class="aspect-square bg-[url('./images/work-4.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group">
-                <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+            </button>
+
+            <button type="button" data-project="dashboard" class="group block text-left">
+                <div class="aspect-square bg-[url('./images/work-4.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
+                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
                     <div>
-                        <h2 class="font-semibold dark:text-black font-Ovo" style="line-height: 1.5;">Raw Material Management Dashboard</h2>
-                        <p class="text-sm text-gray-700">Web Design</p>
-                    </div>
-                    <div class=" border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-                        <img src="./images/send-icon.png" alt="Eye Icon" class="w-5">
+                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Raw Material Management Dashboard</h2>
                     </div>
                 </div>
-            </div>
+            </button>
          </div>
          <!-- <a href="#" class="w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-gray-700 rounded-full px-10 py-3 mx-auto my-20 hover:bg-lightHover duration-500
          dark:text-white dark:border-white dark:hover:bg-darkHover ">
@@ -336,7 +323,6 @@
  <!---------------------------------------contact--------------------------------------->
  <div id="contact" class="w-full px-[12%] py-10 scroll-mt-20 bg-[url('./images/footer-bg-color.png')] bg-no-repeat bg-[length:90%_auto] bg-center
  dark:bg-none">
-    <h4 class="text-center mb-2 text-lg font-Ovo">Connect with me</h4>
     <h2 class="text-center text-5xl font-Ovo">Getting in Touch</h2>
 
     <p class="text-center max-w-2xl mx-auto mt-5 mb-12">
@@ -377,7 +363,7 @@
         </div>
     </div>
     <div class="text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6">
-        <p class="text-gray-600 mt-5 sm:mt-0">© 2024 Sahan Gunathunga. All rights reserved.</p> 
+        <p class="text-gray-600 mt-5 sm:mt-0">© 2025 Sahan Gunathunga. All rights reserved.</p> 
         <ul class="flex items-center gap-10 justify-center mt-4 sm:mt-0">
             <li>
                 <a href="https://www.linkedin.com/in/sahan-dilip/" target="_blank" class="flex items-center gap-2">
@@ -410,5 +396,88 @@
 </div>
 
 <script src="./script.js"></script>
+<!-- Project detail modals -->
+<!-- Orphanage -->
+<div id="modal-orphanage" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
+    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
+        <button type="button" data-close="orphanage" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+        <h2 class="text-2xl font-semibold mb-3">Orphanage Management System for NCPA</h2>
+        <p class="mb-4">Full project description: A web-based system to manage orphanage operations — children records, donations, events, volunteers, and reporting. The system streamlines administrative tasks and provides a secure interface for staff and donors.</p>
+        <h3 class="font-semibold mt-4">My key responsibilities</h3>
+        <ul class="list-disc ml-6 mb-4">
+            <li>Designed and implemented the frontend using React and Tailwind CSS.</li>
+            <li>Built REST APIs with Node.js and Express; designed database schema in PostgreSQL.</li>
+            <li>Implemented authentication, role-based access, and secure file upload for child documents.</li>
+            <li>Deployed using Docker and configured CI pipelines for automated builds.</li>
+        </ul>
+        <h3 class="font-semibold mt-4">Gallery</h3>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <img src="./images/work-1.png" alt="Orphanage screenshot 1" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-1-2.png" alt="Orphanage screenshot 2" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-1-3.png" alt="Orphanage screenshot 3" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-1-4.png" alt="Orphanage screenshot 4" class="h-48 w-full object-cover rounded-md">
+        </div>
+    </div>
+</div>
+
+<!-- E-Commerce -->
+<div id="modal-ecommerce" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
+    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
+        <button type="button" data-close="ecommerce" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+        <h2 class="text-2xl font-semibold mb-3">E-Commerce Platform</h2>
+        <p class="mb-4">Full project description: A scalable e-commerce platform with product catalog, cart, checkout, payment integration, and order management.</p>
+        <h3 class="font-semibold mt-4">My key responsibilities</h3>
+        <ul class="list-disc ml-6 mb-4">
+            <li>Developed product listing and search with optimized queries and caching.</li>
+            <li>Integrated Stripe for payments and implemented order lifecycle tracking.</li>
+            <li>Improved site performance and SEO for product pages.</li>
+        </ul>
+        <h3 class="font-semibold mt-4">Gallery</h3>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <img src="./images/work-2.png" alt="Ecommerce screenshot 1" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-2-2.png" alt="Ecommerce screenshot 2" class="h-48 w-full object-cover rounded-md">
+        </div>
+    </div>
+</div>
+
+<!-- HRMS -->
+<div id="modal-hrms" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
+    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
+        <button type="button" data-close="hrms" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+        <h2 class="text-2xl font-semibold mb-3">Human Resource Management System</h2>
+        <p class="mb-4">Full project description: An internal HRMS for employee records, attendance, leave management, payroll integration and reporting.</p>
+        <h3 class="font-semibold mt-4">My key responsibilities</h3>
+        <ul class="list-disc ml-6 mb-4">
+            <li>Built attendance and leave modules with calendar integrations.</li>
+            <li>Implemented payroll data exports and secure employee portals.</li>
+            <li>Worked on role-based access control and audit logging.</li>
+        </ul>
+        <h3 class="font-semibold mt-4">Gallery</h3>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <img src="./images/work-3.png" alt="HRMS screenshot 1" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-3-2.png" alt="HRMS screenshot 2" class="h-48 w-full object-cover rounded-md">
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div id="modal-dashboard" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
+    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
+        <button type="button" data-close="dashboard" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+        <h2 class="text-2xl font-semibold mb-3">Raw Material Management Dashboard</h2>
+        <p class="mb-4">Full project description: A dashboard to monitor raw material stocks, suppliers, incoming/outgoing shipments, and KPI visualizations.</p>
+        <h3 class="font-semibold mt-4">My key responsibilities</h3>
+        <ul class="list-disc ml-6 mb-4">
+            <li>Designed interactive charts and KPIs using Chart.js and D3 for trend analysis.</li>
+            <li>Implemented data pipelines and endpoints for real-time inventory updates.</li>
+            <li>Collaborated with stakeholders to define useful metrics and alerts.</li>
+        </ul>
+        <h3 class="font-semibold mt-4">Gallery</h3>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <img src="./images/work-4.png" alt="Dashboard screenshot 1" class="h-48 w-full object-cover rounded-md">
+            <img src="./images/work-4-2.png" alt="Dashboard screenshot 2" class="h-48 w-full object-cover rounded-md">
+        </div>
+    </div>
+</div>
 </body>
 </html>
