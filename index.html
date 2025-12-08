@@ -8,291 +8,691 @@
     <script src="./tailwind.config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
+    <style>
+        /* Professional animations and improvements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+        
+        .animate-modal-fade-in {
+            animation: modalFadeIn 0.3s ease-out forwards;
+        }
+        
+        /* Professional project card hover effects */
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        
+        .dark .project-card:hover {
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+        
+        .project-image {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        /* Professional tinted border for project thumbnails */
+        .project-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(219, 125, 32, 0.1));
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-thumbnail:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Smooth scroll improvements */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Modal improvements */
+        .modal-content {
+            max-height: 100vh;
+            height: 100vh;
+            width: 100vw;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 3px;
+        }
+        
+        /* Responsive font scaling */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+            }
+            
+            .section-title {
+                font-size: clamp(2rem, 10vw, 3rem);
+            }
+        }
+        
+        /* Loading states and performance */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Professional button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #db7d20);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7c3aed, #c2661d);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Auto-responsive gallery grid */
+        .auto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        @media (max-width: 640px) {
+            .auto-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .auto-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+        
+        /* Gallery item styles */
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        
+        .dark .gallery-item {
+            background: rgba(31, 41, 55, 0.8);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            max-height: 300px;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.02);
+        }
+        
+        /* Modal backdrop animation */
+        .modal-backdrop {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        /* Scrollbar improvements for modals */
+        .modal-content {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+        }
+        
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 4px;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+    </style>
 </head>
-<body class="overflow-x-hidden font-Outfit leading-8 dark:bg-darkTheme dark:text-white">
+<body class="overflow-x-hidden font-Inter leading-relaxed dark:bg-darkTheme dark:text-white selection:bg-purple-200 selection:text-purple-900 dark:selection:bg-purple-800 dark:selection:text-purple-100">
     <div class="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden">
         <img src="./images/header-bg-color.png" alt="" class="w-full">
     </div>
-    <nav class="w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50">
-
-
-                    <!-- Light Mode Text -->
-            <span class="text-black dark:hidden w-28 cursor-pointer text-2xl">SahanGunathunga</span>
+    <nav class="w-full fixed px-4 sm:px-6 lg:px-8 xl:px-[8%] py-3 sm:py-4 flex items-center justify-between z-50 transition-all duration-300">
+        <!-- Logo/Brand -->
+        <div class="flex items-center">
+            <!-- Light Mode Text -->
+            <span class="text-black dark:hidden cursor-pointer text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight font-Ovo">SahanGunathunga</span>
             
             <!-- Dark Mode Text -->
-            <span class="hidden dark:inline text-white w-28 cursor-pointer text-2xl">SahanGunathunga</span>
+            <span class="hidden dark:inline text-white cursor-pointer text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight font-Ovo">SahanGunathunga</span>
+        </div>
 
         <!-- Navigation Links -->
-        <ul class="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-6 py-2 bg-white shadow-sm bg-opacity-50 font-Ovo
-        dark:border dark:border-white/50 dark:bg-transparent absolute left-1/2 transform -translate-x-1/2 w-max">
-            <li><a href="#top">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">My Work</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <ul class="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 rounded-full px-4 lg:px-6 py-2.5 bg-white/80 backdrop-blur-md shadow-lg bg-opacity-90 font-Inter font-medium text-sm lg:text-base
+        dark:border dark:border-white/20 dark:bg-black/20 dark:backdrop-blur-md absolute left-1/2 transform -translate-x-1/2 w-max transition-all duration-300">
+            <li><a href="#top" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 px-2 py-1">Home</a></li>
+            <li><a href="#about" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 px-2 py-1">About</a></li>
+            <li><a href="#work" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 px-2 py-1">My Work</a></li>
+            <li><a href="#contact" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 px-2 py-1">Contact</a></li>
         </ul>
 
-        <div class="flex items-center gap-4">
-
-            <button onclick="toggleTheme()">
-                <img src="./images/moon_icon.png" alt="" class="w-6 dark:hidden">
-                <img src="./images/sun_icon.png" alt="" class="w-6 hidden dark:block">
+        <div class="flex items-center gap-2 sm:gap-4">
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" aria-label="Toggle theme">
+                <img src="./images/moon_icon.png" alt="Dark mode" class="w-5 sm:w-6 dark:hidden">
+                <img src="./images/sun_icon.png" alt="Light mode" class="w-5 sm:w-6 hidden dark:block">
             </button>
     
-            <!-- Contact Link -->
-            <a href="#contact" class="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo dark:border-white/50">
+            <!-- Contact Link (Desktop) -->
+            <a href="#contact" class="hidden lg:flex items-center gap-2 lg:gap-3 px-6 lg:px-8 xl:px-10 py-2 lg:py-2.5 border border-gray-400 rounded-full font-Inter font-medium text-sm lg:text-base hover:border-purple-500 hover:text-purple-600 dark:border-white/50 dark:hover:border-purple-400 dark:hover:text-purple-400 transition-all duration-200">
                 Contact
-
                 <img src="./images/arrow-icon.png" alt="arrow" class="w-3 dark:hidden">
                 <img src="./images/arrow-icon-dark.png" alt="arrow" class="w-3 hidden dark:block">
             </a>
 
-
-            <button class="block md:hidden ml-3" onclick="openMenu()">
-                <img src = "./images/menu-black.png" alt="" class="w-6 dark:hidden">
-                <img src = "./images/menu-white.png" alt="" class="w-6 hidden dark:block">
+            <!-- Mobile Menu Button -->
+            <button class="block md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" onclick="openMenu()" aria-label="Open menu">
+                <img src="./images/menu-black.png" alt="Menu" class="w-5 sm:w-6 dark:hidden">
+                <img src="./images/menu-white.png" alt="Menu" class="w-5 sm:w-6 hidden dark:block">
             </button>
         </div>
 <!---------------------------------------mobile menu--------------------------------------->
 
-        <ul id="sideMenu" class = "flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 font-Ovo dark:bg-darkHover dark:text-white">            
-
-            <div class="absolute right-6 top-6" >
-                <img src="./images/close-black.png" alt="" class="w-5 cursor-pointer dark:hidden" onclick="closeMenu()">
-                <img src="./images/close-white.png" alt="" class="w-5 cursor-pointer hidden dark:block" onclick="closeMenu()">
+        <ul id="sideMenu" class="flex md:hidden flex-col gap-6 py-20 px-8 fixed -right-64 top-0 bottom-0 w-64 sm:w-72 z-50 h-screen bg-white/95 backdrop-blur-md shadow-2xl transition-all duration-500 font-Inter dark:bg-gray-900/95 dark:text-white border-l border-gray-200 dark:border-gray-700">            
+            <!-- Close Button -->
+            <div class="absolute right-6 top-6">
+                <button onclick="closeMenu()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" aria-label="Close menu">
+                    <img src="./images/close-black.png" alt="Close" class="w-5 cursor-pointer dark:hidden">
+                    <img src="./images/close-white.png" alt="Close" class="w-5 cursor-pointer hidden dark:block">
+                </button>
             </div>
 
-            <li><a href="#top" onclick="closeMenu()">Home</a></li>
-            <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <!-- <li><a href="#services" onclick="closeMenu()">Services</a></li> -->
-            <li><a href="#work" onclick="closeMenu()">My Work</a></li>
-            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-            
+            <li><a href="#top" onclick="closeMenu()" class="block py-3 px-4 text-lg font-medium hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-all duration-200">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()" class="block py-3 px-4 text-lg font-medium hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-all duration-200">About</a></li>
+            <li><a href="#work" onclick="closeMenu()" class="block py-3 px-4 text-lg font-medium hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-all duration-200">My Work</a></li>
+            <li><a href="#contact" onclick="closeMenu()" class="block py-3 px-4 text-lg font-medium hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-all duration-200">Contact</a></li>
         </ul>
     </nav>
 
 
 
 <!---------------------------------------header--------------------------------------->
-<div class = "w-11/12 max-w-3xl mx-auto text-center h-screen flex flex-col items-center justify-center gap-4 ">
-    <img src="./images/profile-img.png" alt="" class="rounded-full w-32 mt-8">
-    <h3 class = "flex items-end gap-2 text-xl md:text-2xl font-Ovo">Hi! I'm Sahan Gunathunga <img src ="./images/hand-icon.png" alt="" class="W-6"></h3>
-    <h3 class="text-3xl sm:text-5xl lg:text-[42px] font-Ovo truncate">Full Stack Developer, DevOps/Agentic AI Practitioner</h3>
-    <p class="max-w-2xl mx-auto font-Ovo">I develop high-quality web and mobile applications with clean design and scalable architecture.  
-  I'm exploring DevOps and the emerging world of agentic AI—building systems that can reason, plan, and act autonomously to solve complex tasks. </p>
+<section class="w-11/12 max-w-4xl mx-auto text-center min-h-screen flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 fade-in-section" id="top">
+    <!-- Profile Image with Animation -->
+    <div class="relative animate-fade-in">
+        <img src="./images/profile-img.png" alt="Sahan Gunathunga" class="rounded-full w-28 sm:w-32 md:w-36 mt-8 shadow-lg border-4 border-white/20 backdrop-blur-sm">
+    </div>
+    
+    <!-- Greeting -->
+    <h3 class="flex items-center justify-center gap-2 text-lg sm:text-xl md:text-2xl font-Ovo animate-slide-in-left">
+        Hi! I'm Sahan Gunathunga 
+        <img src="./images/hand-icon.png" alt="👋" class="w-6 sm:w-7 animate-bounce">
+    </h3>
+    
+    <!-- Main Title -->
+    <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[42px] font-Ovo font-bold leading-tight animate-fade-in-up">
+        <span class="bg-gradient-to-r from-purple-600 via-blue-600 to-orange-500 bg-clip-text text-transparent">
+            Full Stack Developer,
+        </span>
+        <br class="sm:hidden">
+        <span class="bg-gradient-to-r from-orange-500 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+            DevOps/Agentic AI Practitioner
+        </span>
+    </h1>
+    
+    <!-- Description -->
+    <p class="max-w-3xl mx-auto font-Inter text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 animate-fade-in-up px-4">
+        I develop high-quality web and mobile applications with clean design and scalable architecture. 
+        I'm exploring DevOps and the emerging world of agentic AI—building systems that can reason, 
+        plan, and act autonomously to solve complex tasks.
+    </p>
 
-
-    <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
-        <a href="#contact"
-           class="px-10 py-3 border rounded-full bg-gradient-to-t from-[#b820e6] to-[#da7d20] text-white flex items-center gap-2 dark:border-transparent">
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mt-6 sm:mt-8 animate-fade-in-up">
+        <a href="#contact" class="btn-primary px-8 sm:px-10 py-3 sm:py-3.5 border rounded-full text-white flex items-center gap-2 font-Inter font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-300 dark:border-transparent">
             Contact me
             <img src="./images/right-arrow-white.png" alt="arrow" class="w-4">
         </a>
 
-        <a href="./pdf/CV_Sahan_Gunathunga.pdf" download    
-        class="px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black">
-         my resume
-         <img src="./images/download-icon.png" alt="arrow" class="w-4">
-     </a>
+        <a href="./pdf/CV_Sahan_Gunathunga.pdf" download class="px-8 sm:px-10 py-3 sm:py-3.5 border border-gray-400 rounded-full flex items-center gap-2 bg-white/80 backdrop-blur-sm font-Inter font-medium text-sm sm:text-base hover:border-purple-500 hover:bg-white/60 dark:bg-gray-800/80 dark:text-white dark:border-gray-600 dark:hover:border-purple-400 dark:hover:text-black/90 transition-all duration-300 shadow-md hover:shadow-lg">
+            My resume
+        <img src="./images/download-icon.png" alt="download" class="w-4 dark:invert">
+        </a>
     </div>
-    
-</div>
+</section>
 
 
 <!---------------------------------------about--------------------------------------->
 
-<div id="about" class="w-full px-[8%] py-6 scroll-mt-20">
-    <!-- <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4> -->
-    <h2 class="text-center text-5xl font-Ovo">About me</h2>
+<section id="about" class="w-full px-4 sm:px-6 lg:px-8 xl:px-[8%] py-12 sm:py-16 lg:py-20 scroll-mt-20 fade-in-section">
+    <h2 class="section-title text-center text-3xl sm:text-4xl lg:text-5xl font-Ovo font-bold mb-12 sm:mb-16">About me</h2>
 
-    <div class="flex w-full flex-col lg:flex-row items-center gap-8 mb-4 mt-0">
+    <div class="flex w-full flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
         <!-- Image Section -->
-        <div class="max-w-max mx-auto relative">
-            <img src="./images/user-image2.png" class="w-48 sm:w-64 rounded-3xl max-w-none" alt="User Image">
+        <div class="flex-shrink-0 relative animate-fade-in">
+            <img src="./images/user-image2.png" class="w-48 sm:w-56 md:w-64 lg:w-72 rounded-3xl shadow-2xl border-4 border-white/20 backdrop-blur-sm" alt="Sahan Gunathunga">
 
-            <div class="bg-white w-1/2 aspect-square absolute right-0 bottom-0 rounded-full translate-x-1/4 translate-y-1/3 shadow-[0_4px_55px_rgba(149,0,162,0.15)] flex items-center justify-center">
+            <div class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 w-1/2 aspect-square absolute right-0 bottom-0 rounded-full translate-x-1/4 translate-y-1/3 shadow-[0_10px_60px_rgba(139,92,246,0.3)] flex items-center justify-center border-4 border-white/30 dark:border-gray-700/30">
                 <img src="./images/circular-text.png" alt="" class="w-full animate-spin-slow relative rounded-full">
                 <img src="./images/dev-icon.png" alt="" class="w-1/4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             </div>
-
         </div>
 
         <!-- Text Section -->
-        <div class="flex-1">
-            <p class="mb-4 max-w-4xl font-Ovo">
+        <div class="flex-1 max-w-3xl animate-slide-in-left">
+            <p class="mb-6 sm:mb-8 font-Inter text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                 I am an ambitious and dedicated final year undergraduate of Department of Computer Science & Engineering with a strong passion for technology and innovation. Equipped with excellent self-management skills and the ability to adapt effectively under pressure, I am eager to contribute my knowledge and skills to real-world challenges. With a proactive approach and a commitment to excellence, I aim to make meaningful contributions to the industry and society.
             </p>
         
-            <h4 class="my-1 text-gray-700 font-Ovo dark:text-white/80">Tools i use</h4>
+            <h4 class="mb-4 sm:mb-6 text-lg sm:text-xl font-Inter font-semibold text-gray-800 dark:text-white/90">Tools I use</h4>
             
-            <ul class="flex items-center gap-3 sm:gap-5">
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/python-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/java-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/spring-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/langchain-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/c++-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/mysql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/postgresql-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/docker-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/react-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/nextjs-original.png" alt="Next js Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/javascript-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-            </ul>
-            <ul class="flex items-center gap-3 sm:gap-5 mt-5">
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/html5-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/css3-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/angularjs-plain.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/mongodb.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/kubernetes-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/amazonwebservices-original-wordmark.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/c-original.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-                <li class="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500">
-                    <img src="./images/git.png" alt="VS Code Icon" class="w-5 sm:w-7">
-                </li>
-            </ul>
+            <!-- Tech Stack Grid - Responsive -->
+            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-5">
+                <!-- Row 1 -->
+                <div class="tech-icon-container">
+                    <img src="./images/python-original.png" alt="Python" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/java-original.png" alt="Java" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/spring-original.png" alt="Spring" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/langchain-original.png" alt="LangChain" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/c++-original.png" alt="C++" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/mysql-original.png" alt="MySQL" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/postgresql-original.png" alt="PostgreSQL" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/docker-original.png" alt="Docker" class="tech-icon">
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="tech-icon-container">
+                    <img src="./images/react-original.png" alt="React" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/nextjs-original.png" alt="Next.js" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/javascript-original.png" alt="JavaScript" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/html5-original.png" alt="HTML5" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/css3-original.png" alt="CSS3" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/angularjs-plain.png" alt="Angular" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/mongodb.png" alt="MongoDB" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/kubernetes-original.png" alt="Kubernetes" class="tech-icon">
+                </div>
+                
+                <!-- Row 3 -->
+                <div class="tech-icon-container col-span-1">
+                    <img src="./images/amazonwebservices-original-wordmark.png" alt="AWS" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/c-original.png" alt="C" class="tech-icon">
+                </div>
+                <div class="tech-icon-container">
+                    <img src="./images/git.png" alt="Git" class="tech-icon">
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<style>
+    .tech-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border: 1px solid rgb(209 213 219);
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(4px);
+    }
+    
+    .dark .tech-icon-container {
+        border-color: rgb(75 85 99);
+        background: rgba(31 41 55, 0.5);
+    }
+    
+    @media (min-width: 640px) {
+        .tech-icon-container {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .tech-icon-container {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+    
+    .tech-icon-container:hover {
+        transform: translateY(-0.5rem);
+        border-color: rgb(168 85 247);
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+        background: rgb(250 245 255);
+    }
+    
+    .dark .tech-icon-container:hover {
+        background: rgba(88, 28, 135, 0.2);
+    }
+    
+    .tech-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        object-fit: contain;
+    }
+    
+    @media (min-width: 640px) {
+        .tech-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .tech-icon {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+</style>
 
 <!---------------------------------------my work--------------------------------------->
 
-<div id="work" class="w-full px-[12%] py-10 scroll-mt-20 dark:text-white">
-    <!-- <h4 class="text-center mb-2 text-lg font-Ovo">My portfolio</h4> -->
-    <h2 class="text-center text-5xl font-Ovo">My Latest Work</h2>
+<section id="work" class="w-full px-4 sm:px-6 lg:px-8 xl:px-[12%] py-12 sm:py-16 lg:py-20 scroll-mt-20 dark:text-white fade-in-section">
+    <h2 class="section-title text-center text-3xl sm:text-4xl lg:text-5xl font-Ovo font-bold mb-6">My Latest Work</h2>
 
-    <p class="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo">I have worked with a wide range of modern technologies and frameworks. I have hands-on experience databases to deliver efficient and scalable solutions.</p>
+    <p class="text-center max-w-3xl mx-auto mt-5 mb-12 sm:mb-16 font-Inter text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 px-4">
+        I have worked with a wide range of modern technologies and frameworks. I have hands-on experience with databases to deliver efficient and scalable solutions.
+    </p>
 
-         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 my-10 gap-5">
-            <button type="button" data-project="orphanage" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/projects/OpenCare/images0.jpg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">OpenCare – Orphanage Management Platform</h2>
-                    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <!-- Project Cards with Professional Styling -->
+        <button type="button" data-project="orphanage" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/OpenCare/images0.jpg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">OpenCare Orphanage Management Platform</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-            </button>
-            
-            <button type="button" data-project="unimate" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/projects/Uni_Mate/images-0.jpg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">UniMate — Community Events & Lost/Found</h2>
-                    </div>
+            </div>
+        </button>
+        
+        <button type="button" data-project="unimate" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/Uni_Mate/images-0.jpg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">UniMate Community Events & Lost/Found</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-            </button>
-            <button type="button" data-project="bookthedoc" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/projects/BookTheDoc/images-0.jpg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">BookTheDoc — Appointment Management</h2>
-                    </div>
-                </div>
-            </button>
-            <button type="button" data-project="ecommerce" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/projects/Tomato/images-0.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Tomato – Online Food Marketplace </h2>
-                    </div>
-                </div>
-            </button>
+            </div>
+        </button>
 
-            <button type="button" data-project="hrms" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/projects/JupyterHRM/images-0.jpg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Jupyter – Human Resource Management System</h2>
-                    </div>
+        <button type="button" data-project="bookthedoc" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/BookTheDoc/images-0.jpg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">BookTheDoc Appointment Management</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-            </button>
+            </div>
+        </button>
 
-            <button type="button" data-project="dashboard" class="group block text-left">
-                <div class="aspect-square bg-[url('./images/work-4.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">ABC Company — Data Usage Indicator Platform</h2>
-                    </div>
+        <button type="button" data-project="ecommerce" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/Tomato/images-0.png')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">Tomato Online Food Marketplace</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-            </button>
-            
-                <button type="button" data-project="laptop" class="group block text-left">
-                    <div class="aspect-square bg-[url('./images/projects/LtopPredictor/images-0.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                    <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                        <div>
-                            <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Laptop Price Predictor — ML-powered Price Estimator</h2>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" data-project="medibox" class="group block text-left">
-                    <div class="aspect-square bg-[url('./images/projects/MediBox/images-0.jpeg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                    <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                        <div>
-                            <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">MediBox — Automated Medicine Dispenser (ESP32)</h2>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" data-project="nanoproc" class="group block text-left">
-                    <div class="aspect-square bg-[url('./images/projects/NanoProcessor/images-0.jpg')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                    <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                        <div>
-                            <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">NanoProcessor — 4-bit CPU (VHDL)</h2>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" data-project="bordimhub" class="group block text-left">
-                    <div class="aspect-square bg-[url('./images/projects/BordimApp/images-0.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                    <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                        <div>
-                            <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">BordimHub — Accommodation Listings </h2>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" data-project="d2district" class="group block text-left">
-                    <div class="aspect-square bg-[url('./images/projects/D2DistrictWebsite/images-0.png')] bg-no-repeat bg-cover bg-center rounded-lg"></div>
-                    <div class="mt-3 bg-white dark:bg-transparent w-full rounded-md py-3 px-5 flex items-center justify-start">
-                        <div>
-                            <h2 class="font-semibold text-gray-900 dark:text-white font-Ovo">Leo 306D2 — District Website</h2>
-                        </div>
-                    </div>
-                </button>
-         </div>
- </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="hrms" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/JupyterHRM/images-0.jpg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">Jupyter Human Resource Management System</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="dashboard" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/work-4.png')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">ABC Company Data Usage Indicator Platform</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+        
+        <button type="button" data-project="laptop" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/LtopPredictor/images-0.png')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">Laptop Price Predictor ML-powered Price Estimator</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="medibox" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/MediBox/images-0.jpeg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">MediBox Automated Medicine Dispenser (ESP32)</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="nanoproc" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/NanoProcessor/images-0.jpg')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">NanoProcessor 4-bit CPU (VHDL)</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="bordimhub" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/BordimApp/images-0.png')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">BordimHub Accommodation Listings</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <button type="button" data-project="d2district" class="project-card group block text-left bg-white dark:bg-gray-800/50 rounded-xl shadow-lg backdrop-blur-sm overflow-hidden">
+            <div class="project-thumbnail aspect-square bg-[url('./images/projects/D2DistrictWebsite/images-0.png')] bg-no-repeat bg-cover bg-center">
+                <div class="project-image w-full h-full"></div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <h3 class="font-semibold text-gray-900 dark:text-white font-Inter text-sm sm:text-base leading-tight">Leo 306D2 District Website</h3>
+                <div class="flex items-center mt-2 text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-medium">
+                    <span>View Project</span>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+    </div>
+</section>
 
 
  <!---------------------------------------contact--------------------------------------->
@@ -327,95 +727,151 @@
 
 <!---------------------------------------footer--------------------------------------->
 
-<div class="mt-5">
-    <div class="text-center">
-        <span class="text-black dark:hidden w-28 cursor-pointer text-4xl mb-8">SahanGunathunga</span>
-        <span class="hidden dark:inline text-white w-28 cursor-pointer text-4xl">SahanGunathunga</span>
-        <div class="w-max flex items-center gap-2 mx-auto">
-            <img src="./images/mail_icon.png" alt="" class="w-6 dark:hidden"> 
-            <img src="./images/mail_icon_dark.png" alt="" class="w-6 hidden dark:block"> 
-            sahandilip19@gmail.com
+<footer class="mt-8 sm:mt-12 py-8 sm:py-12 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm">
+    <div class="text-center px-4 sm:px-6">
+        <div class="mb-6">
+            <span class="text-black dark:hidden cursor-pointer text-2xl sm:text-3xl lg:text-4xl font-bold font-Ovo">SahanGunathunga</span>
+            <span class="hidden dark:inline text-white cursor-pointer text-2xl sm:text-3xl lg:text-4xl font-bold font-Ovo">SahanGunathunga</span>
+        </div>
+        
+        <div class="flex items-center justify-center gap-2 mb-8 font-Inter text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            <img src="./images/mail_icon.png" alt="Email" class="w-5 sm:w-6 dark:hidden"> 
+            <img src="./images/mail_icon_dark.png" alt="Email" class="w-5 sm:w-6 hidden dark:block"> 
+            <a href="mailto:sahandilip19@gmail.com" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">sahandilip19@gmail.com</a>
         </div>
     </div>
-    <div class="text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6">
-        <p class="text-gray-600 mt-5 sm:mt-0">© 2025 Sahan Gunathunga. All rights reserved.</p> 
-        <ul class="flex items-center gap-10 justify-center mt-4 sm:mt-0">
-            <li>
-                <a href="https://www.linkedin.com/in/sahan-dilip/" target="_blank" class="flex items-center gap-2">
-                    LinkedIn
-                </a>
-            </li>
-            <li>
-                <a href="https://www.facebook.com/sahan.dilip.9" target="_blank" class="flex items-center gap-2">
-                    Facebook
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/sahan-dilip" target="_blank" class="flex items-center gap-2">
-                    GitHub
-                </a>
-            </li>
-
-            <li>
-                <a href="https://www.instagram.com/sahan.dilip/" target="_blank" class="flex items-center gap-2">
-                    Instagram
-                </a>
-            </li>
-            <li>
-                <a href="https://www.linkedin.com/in/sahan-dilip/" target="_blank" class="flex items-center gap-2">
-                    WhatsApp
-                </a>
-            </li>
-        </ul>
+    
+    <div class="border-t border-gray-200 dark:border-gray-700 mx-4 sm:mx-[10%] pt-6 sm:pt-8">
+        <div class="text-center sm:flex items-center justify-between gap-4">
+            <p class="text-gray-600 dark:text-gray-400 font-Inter text-sm sm:text-base mb-4 sm:mb-0">© 2025 Sahan Gunathunga. All rights reserved.</p> 
+            
+            <ul class="flex items-center gap-4 sm:gap-6 lg:gap-8 justify-center flex-wrap">
+                <li>
+                    <a href="https://www.linkedin.com/in/sahan-dilip/" target="_blank" class="font-Inter text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors duration-200">
+                        LinkedIn
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/sahan.dilip.9" target="_blank" class="font-Inter text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors duration-200">
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/sahan-dilip" target="_blank" class="font-Inter text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors duration-200">
+                        GitHub
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/sahan.dilip/" target="_blank" class="font-Inter text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors duration-200">
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/yourwhatsappnumber" target="_blank" class="font-Inter text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors duration-200">
+                        WhatsApp
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</footer>
 
 <script src="./script.js"></script>
 <!-- Project detail modals -->
 <!-- Orphanage -->
-<div id="modal-orphanage" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="orphanage" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-        <h2 class="text-2xl font-semibold mb-3">OpenCare – Child Orphanage Management Platform</h2>
-        <p class="mb-4">
-        The Orphanage Management System is a secure, web-based platform designed for child protection authorities to efficiently manage and oversee orphanages. 
-        The system prioritizes data privacy and security while offering a comprehensive suite of tools for orphanage administration, child profile management, case tracking, and adoption workflows. 
-        Built with scalability and modern web technologies, the platform ensures smooth operations and supports compliance with child data protection standards.
-        </p>
+<div id="modal-orphanage" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">OpenCare</h2>
+            <button type="button" data-close="orphanage" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">OpenCare – Child Orphanage Management Platform</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    The Orphanage Management System is a secure, web-based platform designed for child protection authorities to efficiently manage and oversee orphanages. 
+                    The system prioritizes data privacy and security while offering a comprehensive suite of tools for orphanage administration, child profile management, case tracking, and adoption workflows. 
+                    Built with scalability and modern web technologies, the platform ensures smooth operations and supports compliance with child data protection standards.
+                </p>
+            </div>
 
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>User Authentication & Authorization:</strong> Role-based access control for administrators, social workers, and staff.</li>
-            <li><strong>Orphanage Management:</strong> Create, update, and maintain orphanage profiles with location, capacity, staff, and operational data.</li>
-            <li><strong>Child Profiles:</strong> Securely manage personal, medical, educational, and legal information for each child.</li>
-            <li><strong>Case Management:</strong> Assign and track cases, add progress notes, and monitor child welfare activities.</li>
-            <li><strong>Placement & Adoption Tracking:</strong> Match children with foster families and track adoption progress and documentation.</li>
-            <li><strong>Reports & Analytics:</strong> Generate insights and statistical reports to support decision-making and compliance.</li>
-            <li><strong>Document Management:</strong> Secure upload, storage, and retrieval of legal, medical, and administrative documents.</li>
-            <li><strong>Communication & Notifications:</strong> Automated notifications for important updates, deadlines, and case events.</li>
-        </ul>
-        <p class="mb-4 font-semibold">
-        Tech Stack: React, PostgreSQL, Node.js, Express, Prisma ORM
-        </p>
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image.png" alt="Orphanage screenshot 1" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>User Authentication & Authorization:</strong> Role-based access control for administrators, social workers, and staff.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Orphanage Management:</strong> Create, update, and maintain orphanage profiles with location, capacity, staff, and operational data.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Child Profiles:</strong> Securely manage personal, medical, educational, and legal information for each child.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Case Management:</strong> Assign and track cases, add progress notes, and monitor child welfare activities.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Placement & Adoption Tracking:</strong> Match children with foster families and track adoption progress and documentation.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Reports & Analytics:</strong> Generate insights and statistical reports to support decision-making and compliance.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Document Management:</strong> Secure upload, storage, and retrieval of legal, medical, and administrative documents.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Communication & Notifications:</strong> Automated notifications for important updates, deadlines, and case events.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image-2.png" alt="Orphanage screenshot 2" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">React, PostgreSQL, Node.js, Express, Prisma ORM</p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image-3.png" alt="Orphanage screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image-4.png" alt="Orphanage screenshot 4" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image-5.png" alt="Orphanage screenshot 5" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/OpenCare/image-6.png" alt="Orphanage screenshot 6" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image.png" alt="Orphanage screenshot 1" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image-2.png" alt="Orphanage screenshot 2" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image-3.png" alt="Orphanage screenshot 3" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image-4.png" alt="Orphanage screenshot 4" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image-5.png" alt="Orphanage screenshot 5" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/OpenCare/image-6.png" alt="Orphanage screenshot 6" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -423,85 +879,178 @@
 
 
 <!-- Laptop Price Predictor -->
-<div id="modal-laptop" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="laptop" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-        <h2 class="text-2xl font-semibold mb-3">Laptop Price Predictor — ML-powered Price Estimator</h2>
-
-        <p class="text-sm text-gray-600 mb-4">
-            A data-driven web application that estimates laptop prices using machine learning. The project includes dataset exploration, feature engineering, model training (scikit-learn), a pickled production model, and a Flask-based web UI + REST API for predictions. The app converts predictions to LKR and exposes an endpoint for programmatic use.
-        </p>
-
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>Dataset & EDA:</strong> Cleaned and analyzed a public laptop price dataset; performed visualizations and statistical checks in Jupyter notebooks.</li>
-            <li><strong>Feature Engineering:</strong> Numeric normalization and one-hot encoding of categorical fields (brand, CPU, GPU, OS, type), binary features for touchscreen/IPS, and weight/ram handling.</li>
-            <li><strong>Model Training & Evaluation:</strong> Built and compared regression models using scikit-learn, selected and tuned the best model, and evaluated using RMSE and R² metrics.</li>
-            <li><strong>Model Persistence:</strong> Exported the trained model to <code>predictor.pickle</code> for production usage and fast inference.</li>
-            <li><strong>Flask Web App & REST API:</strong> Lightweight Flask app exposing a <code>/api/predict</code> POST endpoint and a simple web UI (<code>index.html</code>) for interactive predictions.</li>
-            <li><strong>Currency Conversion:</strong> Prediction output converted from EUR (model units) to LKR before returning to the user.</li>
-            <li><strong>Notebooks & Reproducibility:</strong> Jupyter notebook included for exploratory data analysis and model training steps, enabling reproducibility.</li>
-            <li><strong>Easy Integration:</strong> API accepts form-data and can be called from other services or from a frontend form for immediate predictions.</li>
-        </ul>
-
-        <p class="mb-4 font-semibold">Tech Stack: Python, Flask, scikit-learn, pandas, NumPy, Jupyter, HTML/CSS, JavaScript</p>
-
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/LtopPredictor/image.png" alt="Laptop Price Predictor — home UI" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/LtopPredictor/image-1.png" alt="Prediction form and results" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/LtopPredictor/image-2.png" alt="API response example" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
+<div id="modal-laptop" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">Laptop Price Predictor</h2>
+            <button type="button" data-close="laptop" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
         </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/LtopPredictor/image-4.png" alt="Laptop Price Predictor — home UI" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">Laptop Price Predictor — ML-powered Price Estimator</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    A data-driven web application that estimates laptop prices using machine learning. The project includes dataset exploration, feature engineering, model training (scikit-learn), a pickled production model, and a Flask-based web UI + REST API for predictions. The app converts predictions to LKR and exposes an endpoint for programmatic use.
+                </p>
+            </div>
+
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Dataset & EDA:</strong> Cleaned and analyzed a public laptop price dataset; performed visualizations and statistical checks in Jupyter notebooks.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Feature Engineering:</strong> Numeric normalization and one-hot encoding of categorical fields (brand, CPU, GPU, OS, type), binary features for touchscreen/IPS, and weight/ram handling.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Model Training & Evaluation:</strong> Built and compared regression models using scikit-learn, selected and tuned the best model, and evaluated using RMSE and R² metrics.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Model Persistence:</strong> Exported the trained model to <code>predictor.pickle</code> for production usage and fast inference.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Flask Web App & REST API:</strong> Lightweight Flask app exposing a <code>/api/predict</code> POST endpoint and a simple web UI for interactive predictions.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Currency Conversion:</strong> Prediction output converted from EUR (model units) to LKR before returning to the user.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Notebooks & Reproducibility:</strong> Jupyter notebook included for exploratory data analysis and model training steps, enabling reproducibility.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Easy Integration:</strong> API accepts form-data and can be called from other services or from a frontend form for immediate predictions.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">Python, Flask, scikit-learn, pandas, NumPy, Jupyter, HTML/CSS, JavaScript</p>
+            </div>
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/LtopPredictor/image.png" alt="Laptop Price Predictor — home UI" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/LtopPredictor/image-1.png" alt="Prediction form and results" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/LtopPredictor/image-2.png" alt="API response example" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/LtopPredictor/image-4.png" alt="Model evaluation results" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- E-Commerce -->
-<div id="modal-ecommerce" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="ecommerce" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+<div id="modal-ecommerce" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">Tomato</h2>
+            <button type="button" data-close="ecommerce" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
         
-        <h2 class="text-2xl font-semibold mb-3">E-Commerce Platform</h2>
-        
-        <p class="mb-4">
-            A scalable e-commerce platform where customers can browse and order food items. 
-            The system includes a product catalog, shopping cart, checkout process, Stripe payment integration, and an admin panel for managing store operations.
-        </p>
-        
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li>User & Admin Panels, Login/Signup, Logout</li>
-            <li>JWT Authentication, Password Hashing with Bcrypt, Role-Based Identification</li>
-            <li>Add to Cart, Place Order, Order Management, Products Management, Filter Food Products</li>
-            <li>Stripe Payment Integration, Authenticated REST APIs</li>
-            <li>Beautiful Alerts and Notifications</li>
-        </ul>
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">Tomato – Online Food Marketplace</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    A scalable e-commerce platform where customers can browse and order food items. The system includes a product catalog, shopping cart, checkout process, Stripe payment integration, and an admin panel for managing store operations.
+                </p>
+            </div>
 
-        <p class="mb-4 font-semibold">Tech Stack: React, Node.js, Express, MongoDB</p>
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>User & Admin Panels:</strong> Complete authentication system with Login/Signup and role-based access control.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>JWT Authentication:</strong> Secure authentication with password hashing using Bcrypt and role-based identification.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Shopping Cart & Orders:</strong> Add to Cart, Place Order, Order Management with comprehensive tracking.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Product Management:</strong> Complete products management system with filtering and search capabilities.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Stripe Payment Integration:</strong> Secure payment processing with Stripe API integration.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>REST APIs:</strong> Authenticated REST APIs with comprehensive error handling and validation.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>User Experience:</strong> Beautiful alerts, notifications, and responsive design across all devices.</div>
+                    </li>
+                </ul>
+            </div>
 
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Tomato/image.png" alt="Ecommerce screenshot 1" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">React, Node.js, Express, MongoDB, Stripe API, JWT, Bcrypt</p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Tomato/image-2.png" alt="Ecommerce screenshot 2" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Tomato/image-3.png" alt="Ecommerce screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Tomato/image-4.png" alt="Ecommerce screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/Tomato/image.png" alt="Tomato homepage and product catalog" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Tomato/image-2.png" alt="Shopping cart and checkout process" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Tomato/image-3.png" alt="Admin panel and product management" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Tomato/image-4.png" alt="Order management and tracking" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -509,36 +1058,77 @@
 
 
 <!-- HRMS -->
-<div id="modal-hrms" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="hrms" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+<div id="modal-hrms" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">Jupyter HRMS</h2>
+            <button type="button" data-close="hrms" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
         
-        <h2 class="text-2xl font-semibold mb-3">Human Resource Management System</h2>
-        
-        <p class="mb-4">
-            An internal HRMS platform for managing employee records, attendance, leave requests, payroll, performance evaluations, and recruitment processes. 
-            The system provides role-based access control, secure employee portals, and reporting tools for HR teams.
-        </p>
-        
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li>Employee Management: Personal details, job history, and performance records</li>
-            <li>Leave Management: Leave requests, balances, and reporting</li>
-            <li>Attendance Tracking & Reports</li>
-            <li>Performance Evaluation: Track performance over time</li>
-            <li>Payroll Management: Salaries, deductions, and bonuses</li>
-            <li>Recruitment: Job postings, applications, and candidate evaluations</li>
-        </ul>
-
-        <p class="mb-4 font-semibold">Tech Stack: React, Node.js, Express, MongoDB</p>
-
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/JupyterHRM/image.png" alt="HRMS screenshot 1" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">Jupyter – Human Resource Management System</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    An internal HRMS platform for managing employee records, attendance, leave requests, payroll, performance evaluations, and recruitment processes. The system provides role-based access control, secure employee portals, and reporting tools for HR teams.
+                </p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/JupyterHRM/image-2.png" alt="HRMS screenshot 2" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Employee Management:</strong> Comprehensive management of personal details, job history, and performance records with secure access control.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Leave Management:</strong> Complete leave request system with balance tracking, approval workflows, and detailed reporting.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Attendance Tracking:</strong> Real-time attendance monitoring with comprehensive reporting and analytics.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Performance Evaluation:</strong> Systematic performance tracking over time with goal setting and review cycles.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Payroll Management:</strong> Automated salary calculations with deductions, bonuses, and comprehensive payroll reporting.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Recruitment Module:</strong> Complete recruitment workflow with job postings, applications, and candidate evaluation tools.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">React, Node.js, Express, MongoDB, JWT Authentication, Role-based Access Control</p>
+            </div>
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/JupyterHRM/image.png" alt="HRMS dashboard and employee overview" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/JupyterHRM/image-2.png" alt="Leave management and attendance tracking" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -548,310 +1138,667 @@
 
 
 <!-- Dashboard -->
-<div id="modal-dashboard" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="dashboard" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-        <h2 class="text-2xl font-semibold mb-3">ABC Company — Data Usage Indicator Platform</h2>
-
-        <p class="mb-4">
-            A data usage indicator platform that ingests spreadsheet and site data, processes it, and exposes visual indicators and charts for both admin and regular users. The system supports secure authentication, role-based access, spreadsheet integration (Google Sheets & Excel), and persistent storage in MySQL.
-        </p>
-
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>Authentication:</strong> JWT-based login/register flow with bcrypt-hashed passwords and jsonwebtoken support (auth controller & routes).</li>
-            <li><strong>Role Verification / Authorization:</strong> Middleware (VerifyRoles.js) enforces role-based access control for protected endpoints.</li>
-            <li><strong>API Endpoints:</strong> Backend controllers such as <code>auth.js</code> and <code>sheet.js</code> with routes under <code>/auth/*</code> and <code>/sheet/*</code> for data ingest and retrieval.</li>
-            <li><strong>Google Sheets Integration:</strong> Read/write integration using <code>google-spreadsheet</code> and <code>google-auth-library</code>.</li>
-            <li><strong>Excel / CSV Handling:</strong> Parsing and exporting via <code>xlsx</code> to support offline spreadsheet uploads and downloads.</li>
-            <li><strong>MySQL Persistence:</strong> User accounts and application data stored via <code>mysql2</code>.</li>
-            <li><strong>Cookie & CORS Handling:</strong> <code>cookie-parser</code> and <code>cors</code> configured for cookie management and cross-origin requests.</li>
-            <li><strong>Charts & Visualizations:</strong> Charting via <code>chart.js</code> and <code>react-chartjs-2</code>, including annotation support for KPI thresholds.</li>
-        </ul>
-
-        <p class="mb-4 font-semibold">Tech stack (summary): Node.js, Express, MySQL, Google Sheets API, React, Vite, Chart.js, MUI/AntD/PrimeReact</p>
-
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Alumex/image-3.png" alt="ABC screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+<div id="modal-dashboard" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">ABC Company</h2>
+            <button type="button" data-close="dashboard" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">ABC Company — Data Usage Indicator Platform</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    A data usage indicator platform that ingests spreadsheet and site data, processes it, and exposes visual indicators and charts for both admin and regular users. The system supports secure authentication, role-based access, spreadsheet integration (Google Sheets & Excel), and persistent storage in MySQL.
+                </p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Alumex/image.png" alt="ABC screenshot 1" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Authentication:</strong> JWT-based login/register flow with bcrypt-hashed passwords and jsonwebtoken support.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Role Verification:</strong> Middleware enforces role-based access control for protected endpoints.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>API Endpoints:</strong> Backend controllers with routes for data ingest and retrieval operations.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Google Sheets Integration:</strong> Read/write integration using google-spreadsheet and google-auth-library.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Excel / CSV Handling:</strong> Parsing and exporting via xlsx to support offline spreadsheet operations.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>MySQL Persistence:</strong> User accounts and application data stored via mysql2 with optimized queries.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Cookie & CORS Handling:</strong> Configured for cookie management and cross-origin requests.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Charts & Visualizations:</strong> Interactive charting via Chart.js and react-chartjs-2 with KPI thresholds.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Alumex/image-2.jpeg" alt="ABC screenshot 2" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">Node.js, Express, MySQL, Google Sheets API, React, Vite, Chart.js, MUI/AntD/PrimeReact</p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/Alumex/image-4.png" alt="ABC screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/Alumex/image-3.png" alt="Dashboard with data visualizations and KPI indicators" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Alumex/image.png" alt="Spreadsheet integration and data management interface" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Alumex/image-2.jpeg" alt="Admin panel and user management system" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Alumex/image-4.png" alt="Charts and analytics with real-time updates" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- UniMate -->
-<div id="modal-unimate" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="unimate" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-        <h2 class="text-2xl font-semibold mb-3">UniMate — Community Events & Lost/Found (Expo / Supabase)</h2>
+<div id="modal-unimate" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">UniMate</h2>
+            <button type="button" data-close="unimate" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">UniMate — Community Events & Lost/Found</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    UniMate is a cross-platform community mobile app (Expo) for discovering and sharing campus/community events, and for managing lost & found items. It focuses on realtime updates, easy media uploads, and reliable user sessions via Supabase.
+                </p>
+            </div>
 
-        <p class="mb-4">
-            UniMate is a cross-platform community mobile app (Expo) for discovering and sharing campus/community events, and for managing lost & found items. It focuses on realtime updates, easy media uploads, and reliable user sessions via Supabase.
-        </p>
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>User Authentication:</strong> Sign-in and identity handled by Supabase Auth for secure user sessions.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Events:</strong> Browse, create, share, RSVP, and bookmark events with images, organizer details, dates, and locations.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Lost & Found:</strong> Create and browse lost/found posts with photos, location metadata, and contact information.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Selective Wishlist:</strong> Save/bookmark both events and lost-found items with real-time updates.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Search & Filters:</strong> Full-text search and segmented filters for quick discovery of content.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Maps & Directions:</strong> Location parsing and open-directions integration using react-native-maps.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Media & Storage:</strong> Image upload and retrieval via Supabase Storage with graceful fallbacks.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Realtime Updates:</strong> Supabase realtime channels for live updates to wishlists and posts.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Cross-platform UX:</strong> Built with Expo Router for consistent behavior on iOS, Android and web.</div>
+                    </li>
+                </ul>
+            </div>
 
-    <h3 class="font-semibold mt-4">Key Features</h3>
-    <ul class="list-disc ml-6 mb-4">
-        <li><strong>User Authentication:</strong> Sign-in and identity handled by Supabase Auth for secure user sessions.</li>
-        <li><strong>Events:</strong> Browse, create, share, RSVP, and bookmark events. Events support images, organizer details, dates, locations, and in-app sharing.</li>
-        <li><strong>Lost & Found:</strong> Create and browse lost/found posts with photos, location metadata, contact info, and a "mark resolved" workflow for owners.</li>
-        <li><strong>Selective Wishlist:</strong> Save/bookmark both events and lost-found items — wishlist entries update in real time.</li>
-        <li><strong>Profiles:</strong> User profile management and "My Posts" filtering for ownership awareness.</li>
-        <li><strong>Search & Filters:</strong> Full-text search and simple segmented filters (e.g., All / My Posts) for quick discovery.</li>
-        <li><strong>Maps & Directions:</strong> Location parsing and open-directions integration using `react-native-maps` and custom map helpers.</li>
-        <li><strong>Media & Storage:</strong> Image upload and retrieval via Supabase Storage; gracefully falls back to default assets when images are missing.</li>
-        <li><strong>Realtime Updates:</strong> Uses Supabase realtime (channels / postgres_changes) to refresh listings like wishlists and lost/found posts.</li>
-        <li><strong>Cross-platform UX:</strong> Built with Expo Router and React Navigation for consistent behavior on iOS, Android and web.</li>
-    </ul>
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">Expo (React Native), TypeScript, Supabase (Postgres, Auth, Storage, Realtime), React Navigation, react-native-maps</p>
+            </div>
 
-    <p class="mb-4 font-semibold">
-    Tech Stack: `Expo (React Native)`, `TypeScript`, `Supabase (Postgres, Auth, Storage, Realtime)`, [React Navigation](http://_vscodecontentref_/7) / `Expo Router`, `react-native-maps`, `@expo/vector-icons`
-    </p>
-
-    <h3 class="font-semibold mt-4">Gallery</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image.jpg" alt="Uni_Mate app icon / placeholder" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image.jpg" alt="UniMate app interface with community events" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image-2.jpg" alt="Lost and found listings with location details" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image-3.jpg" alt="Event creation and management interface" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image-4.jpg" alt="Events screen with list and add event functionality" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image-5.jpg" alt="Lost and found listing with search capabilities" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/Uni_Mate/image-6.jpg" alt="Item detail page with directions and contact information" class="gallery-image">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image-2.jpg" alt="Tech stack logo (React/Expo) placeholder" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-        </div>
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image-3.jpg" alt="Placeholder screenshot 3" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-        </div>
-
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image-4.jpg" alt="Events screen — list & add event" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-        </div>
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image-5.jpg" alt="Lost & Found listing" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-        </div>
-        <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-            <img src="./images/projects/Uni_Mate/image-6.jpg" alt="Item detail / directions / contact" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-        </div>
-    </div>
     </div>
 </div>
 
 <!-- BookTheDoc -->
-<div id="modal-bookthedoc" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="bookthedoc" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
+<div id="modal-bookthedoc" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">BookTheDoc</h2>
+            <button type="button" data-close="bookthedoc" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">BookTheDoc — Appointment & Timeslot Management</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    BookTheDoc is an appointment scheduling platform for channelling centres, hospitals, doctors and patients — providing timeslot management, concurrency-safe bookings, dashboards and calendar-driven workflows for efficient healthcare management.
+                </p>
+            </div>
 
-        <h2 class="text-2xl font-semibold mb-3">BookTheDoc — Appointment & Timeslot Management</h2>
-        <p class="mb-4">BookTheDoc is an appointment scheduling platform for channelling centres, hospitals, doctors and patients — providing timeslot management, concurrency-safe bookings, dashboards and calendar-driven workflows.</p>
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>User Authentication & Authorization:</strong> JWT-based authentication with bcrypt hashing and role-based middleware for all user types.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Center & Hospital Management:</strong> Complete profile management for channelling centers and hospitals with location details.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Doctor Management:</strong> Comprehensive doctor profiles with hospital affiliations, specializations, and filtering capabilities.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Timeslot Management:</strong> Dynamic timeslot creation with date, duration, and patient capacity management per doctor.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Appointment Scheduling:</strong> Concurrency-safe booking system using MongoDB transactions with queue management.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Patient Profiles & Appointments:</strong> Secure patient management with comprehensive appointment history and details.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Dashboard & Calendar:</strong> Interactive dashboards with calendar views and analytics using react-big-calendar and recharts.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Robust API & Data Layer:</strong> RESTful API with MongoDB for scalable data management and secure operations.</div>
+                    </li>
+                </ul>
+            </div>
 
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>User Authentication & Authorization:</strong> JWT-based authentication with password hashing (bcrypt) and role checks via middleware for patients, channelling centers, and admins.</li>
-            <li><strong>Center & Hospital Management:</strong> Create, update, and maintain channelling center and hospital profiles with contact and location details.</li>
-            <li><strong>Doctor Management:</strong> Add and browse doctors, filter by hospital or specialization, and manage doctor profiles.</li>
-            <li><strong>Timeslot Management:</strong> Channelling centers create timeslots for doctors (date, start/end, max patients); APIs to fetch timeslots per doctor and per center.</li>
-            <li><strong>Appointment Scheduling:</strong> Patients can book appointments against timeslots with concurrency-safe booking using MongoDB transactions, queue numbers, and booking validation.</li>
-            <li><strong>Patient Profiles & Appointments:</strong> Secure endpoints to manage patient profiles and to list appointments with doctor, center, date/time and queue information.</li>
-            <li><strong>Dashboard & Calendar:</strong> Frontend dashboard with calendar and charts for centers and users (uses <code>react-big-calendar</code>, <code>recharts</code>, and <code>react-countup</code>).</li>
-            <li><strong>Robust API & Data Layer:</strong> RESTful API built with Node.js, Express and Mongoose; MongoDB stores appointments, timeslots, doctors, centers and patients.</li>
-        </ul>
-        <p class="mb-4 font-semibold">Tech Stack: React (Vite) + Tailwind CSS + Ant Design, Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, Axios</p>
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">React (Vite) + Tailwind CSS + Ant Design, Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, Axios</p>
+            </div>
 
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image.png" alt="Book the Doc — Dashboard overview" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image-2.png" alt="Book the Doc — Doctor listing & filters" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image-3.png" alt="Book the Doc — Timeslot management & calendar" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image-4.png" alt="Book the Doc — Appointment booking flow" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image-5.png" alt="Book the Doc — Patient appointment list" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-            </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/BookTheDoc/image-6.png" alt="Book the Doc — Center view of today's timeslots" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image.png" alt="BookTheDoc dashboard overview with appointment analytics" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image-2.png" alt="Doctor listing interface with specialization filters" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image-3.png" alt="Timeslot management system with calendar integration" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image-4.png" alt="Patient appointment booking workflow" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image-5.png" alt="Patient appointment history and management" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/BookTheDoc/image-6.png" alt="Center dashboard with today's timeslot overview" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
     <!-- BordimHub -->
-    <div id="modal-bordimhub" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-        <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-            <button type="button" data-close="bordimhub" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-
-            <h2 class="text-2xl font-semibold mb-3">BordimHub — Accommodation Listings & Auth</h2>
-            <p class="mb-4">BordimHub is a listing & booking platform with OTP/email verification, listing management, moderation, and admin analytics—designed for secure listing workflows and scalable reporting.</p>
-
-            <h3 class="font-semibold mt-4">Key Features</h3>
-            <ul class="list-disc ml-6 mb-4">
-                <li><strong>User Authentication & Authorization:</strong> Email + OTP verification flow, JWT access & refresh tokens, secure refresh cookie handling, password hashing with bcrypt and role support for flexible access control (admin/staff/user).</li>
-                <li><strong>OTP & Email Verification:</strong> Request and verify OTP endpoints with resend cooldowns and server-side verification; transactional email support via Nodemailer / Google API / Supabase integrations.</li>
-                <li><strong>Listings & Place Management:</strong> Create, update and view place/accommodation listings with images, amenities, pricing, location, and capacity. Includes a post-add listing form and place detail pages.</li>
-                <li><strong>User Profiles & Wishlist:</strong> User profile management and wishlist/save-for-later functionality to bookmark favorite listings.</li>
-                <li><strong>Case-like Workflows & Moderation:</strong> Listing submission with review/moderation patterns, draft saves, and admin controls to approve or remove content.</li>
-                <li><strong>Reports & Analytics Ready:</strong> Backend schema and Drizzle ORM + PostgreSQL integration provide a foundation for reports, usage statistics, and admin dashboards.</li>
-                <li><strong>Document & Media Handling:</strong> Secure image uploads and preview handling on the frontend with limits (max images), and backend-ready hooks for file storage integration.</li>
-                <li><strong>Security & Rate Limiting:</strong> Middleware for JWT verification, OTP checks and express-rate-limit configured to protect critical endpoints and reduce abuse.</li>
-                <li><strong>Communication & Notifications:</strong> Automated transactional emails and notification flows for OTPs, registration, and important user events.</li>
-            </ul>
-
-            <p class="mb-4 font-semibold">Tech Stack: Next.js (React 19) + TypeScript, Tailwind CSS, Zustand, Radix UI; Backend: Node.js, Express, TypeScript, Drizzle ORM + PostgreSQL, Supabase, Nodemailer, bcrypt, JWT, express-rate-limit</p>
-
-            <h3 class="font-semibold mt-4">Gallery</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/BordimApp/image.png" alt="Bordim App — Home / Listings view" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+    <div id="modal-bordimhub" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+        <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+            <!-- Sticky Header with Close Button -->
+            <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">BordimHub</h2>
+                <button type="button" data-close="bordimhub" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    Close
+                </button>
+            </div>
+            
+            <!-- Modal Content -->
+            <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+                <!-- Project Title and Subtitle -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">BordimHub — Accommodation Listings & Auth</h1>
+                    <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                        BordimHub is a comprehensive listing & booking platform with OTP/email verification, listing management, moderation, and admin analytics—designed for secure listing workflows and scalable reporting in the accommodation sector.
+                    </p>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/BordimApp/image-4.png" alt="Bordim App — Place detail page" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Key Features -->
+                <div>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>User Authentication & Authorization:</strong> Email + OTP verification with JWT tokens, bcrypt hashing, and flexible role-based access control.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>OTP & Email Verification:</strong> Secure OTP endpoints with resend cooldowns and transactional email support via multiple providers.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Listings & Place Management:</strong> Complete accommodation listing system with images, amenities, pricing, location, and capacity management.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>User Profiles & Wishlist:</strong> Comprehensive user profile management with wishlist functionality to bookmark favorite listings.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Moderation Workflows:</strong> Listing submission with review patterns, draft saves, and admin controls for content approval.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Reports & Analytics:</strong> Backend schema with Drizzle ORM + PostgreSQL for comprehensive reporting and analytics dashboards.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Media Handling:</strong> Secure image uploads with preview handling and backend storage integration hooks.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Security & Rate Limiting:</strong> JWT verification middleware with express-rate-limit for endpoint protection and abuse prevention.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Communication & Notifications:</strong> Automated transactional emails for OTPs, registration, and important user events.</div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/BordimApp/image-2.png" alt="Bordim App — Post add / Listing form" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Tech Stack -->
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                    <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                    <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">Next.js (React 19) + TypeScript, Tailwind CSS, Zustand, Radix UI; Backend: Node.js, Express, TypeScript, Drizzle ORM + PostgreSQL, Supabase, Nodemailer, bcrypt, JWT</p>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/BordimApp/image-3.png" alt="Bordim App — OTP verification flow" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Gallery -->
+                <div>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                    <div class="auto-grid gap-4 lg:gap-6">
+                        <div class="gallery-item">
+                            <img src="./images/projects/BordimApp/image.png" alt="BordimHub home page with accommodation listings view" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/BordimApp/image-4.png" alt="Detailed accommodation page with amenities and booking options" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/BordimApp/image-2.png" alt="Listing creation form with image upload and details" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/BordimApp/image-3.png" alt="OTP verification flow for secure user authentication" class="gallery-image">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 <!-- NanoProcessor -->
-<div id="modal-nanoproc" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-    <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-        <button type="button" data-close="nanoproc" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-        <h2 class="text-2xl font-semibold mb-3">NanoProcessor — 4-bit Educational CPU</h2>
-
-        <p class="mt-2 text-sm text-muted">
-            A compact, hand-designed 4-bit processor implemented in VHDL and validated with testbenches and an FPGA (BASYS3). Designed to demonstrate datapath/control design, modular component integration, and hardware verification.
-        </p>
-
-        <h3 class="font-semibold mt-4">Key Features</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>Small Instruction Set:</strong> Implements 4 instructions — <code>MOVI R, d</code>, <code>ADD Ra, Rb</code>, <code>NEG R</code>, and <code>JZR R, d</code> — ideal for teaching control & datapath design.</li>
-            <li><strong>Modular Component Design:</strong> Separate, reusable modules for the 4-bit add/sub unit, 3-bit adder, program counter, and multiple multiplexers, enabling clear separation of concerns and easy testing.</li>
-            <li><strong>Register Bank:</strong> 4-bit register bank with read/write control for general-purpose registers used by the instruction set.</li>
-            <li><strong>Program ROM & Instruction Decoder:</strong> ROM-based instruction storage with a dedicated decoder to produce control signals for the datapath.</li>
-            <li><strong>Clocking & Slow Clock:</strong> Built-in slow clock generation for step-by-step hardware debugging and synchronization with testbenches and FPGA board buttons/LEDs.</li>
-            <li><strong>Testbenches & Simulation:</strong> Extensive VHDL testbenches (e.g., adder and CPU-level tests) run with XSIM/ModelSim, providing waveform outputs for functional verification.</li>
-            <li><strong>FPGA Implementation:</strong> Synthesized and implemented with Xilinx Vivado; bitstream generation and board testing performed on the BASYS3 development board.</li>
-            <li><strong>Reports & Artifacts:</strong> Timing, utilization, and route reports generated during implementation (timing summary, utilization reports, .bit file, and TCL scripts present in the project outputs).</li>
-        </ul>
-
-        <p class="mb-4 font-semibold">
-        Tech Stack: VHDL, Xilinx Vivado (synthesis & implementation), XSIM/ModelSim (simulation), BASYS3 FPGA, TCL scripts & testbenches
-        </p>
-
-        <h3 class="font-semibold mt-4">Designed Components</h3>
-        <ul class="list-disc ml-6 mb-4">
-            <li><strong>4-bit Add/Subtract Unit</strong> — supports add and subtract operations, used for ALU behavior including NEG (two's complement).</li>
-            <li><strong>3-bit Adder</strong> — used for program counter increments and address arithmetic.</li>
-            <li><strong>3-bit Program Counter</strong> — holds instruction addresses and supports conditional jumps.</li>
-            <li><strong>2-way 3-bit Multiplexer</strong> — select between address sources or small control paths.</li>
-            <li><strong>2-way 4-bit Multiplexer</strong> — used in datapath to select immediate vs register data.</li>
-            <li><strong>8-way 4-bit Multiplexer</strong> — selects register outputs for ALU inputs or write-back.</li>
-            <li><strong>Register Bank</strong> — small register file for the CPU registers, supporting read/write ports.</li>
-            <li><strong>Program ROM</strong> — stores the instruction stream (assembled machine code for the 4-instruction ISA).</li>
-            <li><strong>Instruction Decoder</strong> — decodes opcodes and generates control signals for datapath elements.</li>
-            <li><strong>Slow Clock</strong> — optional slowed clock for manual stepping during debugging on-board.</li>
-        </ul>
-
-        <h3 class="font-semibold mt-4">Gallery</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/NanoProcessor/image.jpg" alt="NanoProcessor block diagram" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+<div id="modal-nanoproc" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+    <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+        <!-- Sticky Header with Close Button -->
+        <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">NanoProcessor</h2>
+            <button type="button" data-close="nanoproc" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+            <!-- Project Title and Subtitle -->
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">NanoProcessor — 4-bit Educational CPU</h1>
+                <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                    A compact, hand-designed 4-bit processor implemented in VHDL and validated with testbenches and an FPGA (BASYS3). Designed to demonstrate datapath/control design, modular component integration, and hardware verification principles.
+                </p>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/NanoProcessor/image-2.png" alt="Register bank & ALU waveform" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Key Features -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Small Instruction Set:</strong> Implements 4 core instructions (MOVI, ADD, NEG, JZR) ideal for teaching control & datapath design.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Modular Component Design:</strong> Separate reusable modules for add/sub unit, adder, program counter, and multiplexers.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Register Bank:</strong> 4-bit register bank with read/write control for general-purpose registers used by the instruction set.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Program ROM & Decoder:</strong> ROM-based instruction storage with dedicated decoder for control signal generation.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Clocking & Debug:</strong> Built-in slow clock generation for step-by-step debugging and FPGA board synchronization.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Testbenches & Simulation:</strong> Extensive VHDL testbenches with XSIM/ModelSim for comprehensive functional verification.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>FPGA Implementation:</strong> Synthesized with Xilinx Vivado and tested on BASYS3 development board.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Reports & Artifacts:</strong> Complete timing, utilization, and route reports with bitstream generation and TCL scripts.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                <img src="./images/projects/NanoProcessor/image-3.jpeg" alt="Instruction ROM & control signals" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+            <!-- Designed Components Section -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Designed Components</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>4-bit Add/Subtract Unit:</strong> ALU supporting add/subtract operations including NEG (two's complement).</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>3-bit Adder:</strong> Used for program counter increments and address arithmetic operations.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Program Counter:</strong> 3-bit counter holding instruction addresses with conditional jump support.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Multiplexers:</strong> 2-way, 8-way multiplexers for datapath routing and register selection.</div>
+                    </li>
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div><strong>Instruction Decoder:</strong> Decodes opcodes and generates control signals for datapath elements.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">VHDL, Xilinx Vivado (synthesis & implementation), XSIM/ModelSim (simulation), BASYS3 FPGA, TCL scripts & testbenches</p>
+            </div>
+
+            <!-- Gallery -->
+            <div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                <div class="auto-grid gap-4 lg:gap-6">
+                    <div class="gallery-item">
+                        <img src="./images/projects/NanoProcessor/image.jpg" alt="NanoProcessor block diagram showing datapath and control unit" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/NanoProcessor/image-2.png" alt="Register bank and ALU waveform simulation results" class="gallery-image">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./images/projects/NanoProcessor/image-3.jpeg" alt="Instruction ROM and control signal implementation" class="gallery-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
     <!-- Leo 306D2 District Website -->
-    <div id="modal-d2district" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-        <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-            <button type="button" data-close="d2district" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-
-            <h2 class="text-2xl font-semibold mb-3">Leo 306D2 — District Website</h2>
-            <p class="mb-4">Official district website for Leo District 306D2. I contributed to the website design, content layout, and responsive front-end implementation. Live site: <a href="https://leodistrict306d2.org" target="_blank" class="text-blue-600">leodistrict306d2.org</a>.</p>
-
-            <h3 class="font-semibold mt-4">Key Features</h3>
-            <ul class="list-disc ml-6 mb-4">
-                <li><strong>Events & Announcements:</strong> Event listings, calendars and news updates for district activities.</li>
-                <li><strong>Members & Contacts:</strong> Directory pages for officers and clubs with contact links and profiles.</li>
-                <li><strong>Responsive Design:</strong> Mobile-first layout with accessible navigation and readable content on all devices.</li>
-                <li><strong>Resource Pages:</strong> Documents, photo galleries, and event registration forms.</li>
-                <li><strong>SEO & Sharing:</strong> Metadata and social sharing support for events and announcements.</li>
-            </ul>
-
-            <p class="mb-4 font-semibold">Tech Stack: HTML, CSS, JavaScript, Responsive Web Design (Tailwind/utility classes where applicable)</p>
-
-            <h3 class="font-semibold mt-4">Gallery</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/D2DistrictWebsite/image.png" alt="D2 District — home" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+    <div id="modal-d2district" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+        <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+            <!-- Sticky Header with Close Button -->
+            <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">Leo 306D2</h2>
+                <button type="button" data-close="d2district" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    Close
+                </button>
+            </div>
+            
+            <!-- Modal Content -->
+            <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 pb-0 space-y-6 lg:space-y-8">
+                <!-- Project Title and Subtitle -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">Leo 306D2 — District Website</h1>
+                    <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                        Official district website for Leo District 306D2. I contributed to the website design, content layout, and responsive front-end implementation for this Lions Club district organization. <a href="https://leodistrict306d2.org" target="_blank" class="text-purple-600 hover:text-purple-700 underline">Visit live site →</a>
+                    </p>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/D2DistrictWebsite/image-2.png" alt="D2 District — events" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Key Features -->
+                <div>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Events & Announcements:</strong> Comprehensive event listings, calendars and news updates for district activities and communications.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Members & Contacts:</strong> Detailed directory pages for officers and clubs with contact information, links, and member profiles.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Responsive Design:</strong> Mobile-first layout with accessible navigation and readable content optimized for all devices.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>Resource Pages:</strong> Document libraries, photo galleries, and event registration forms for member engagement.</div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div><strong>SEO & Sharing:</strong> Optimized metadata and social sharing support for events and announcements to increase visibility.</div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/D2DistrictWebsite/image-3.png" alt="D2 District — members" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Tech Stack -->
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                    <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                    <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">HTML5, CSS3, JavaScript, Responsive Web Design, Tailwind CSS (utility classes), SEO optimization</p>
                 </div>
-                <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                    <img src="./images/projects/D2DistrictWebsite/image-4.png" alt="D2 District — gallery" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+
+                <!-- Gallery -->
+                <div>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                    <div class="auto-grid gap-4 lg:gap-6">
+                        <div class="gallery-item">
+                            <img src="./images/projects/D2DistrictWebsite/image.png" alt="Leo District 306D2 homepage with navigation and hero section" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/D2DistrictWebsite/image-2.png" alt="Events page with calendar and upcoming activities" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/D2DistrictWebsite/image-3.png" alt="Members directory with officer profiles and contact information" class="gallery-image">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./images/projects/D2DistrictWebsite/image-4.png" alt="Photo gallery showcasing district events and activities" class="gallery-image">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
         <!-- MediBox -->
-        <div id="modal-medibox" class="hidden fixed inset-0 z-50 items-stretch bg-black/50">
-            <div class="bg-white dark:bg-darkTheme text-black dark:text-white h-full w-full rounded-none p-6 relative overflow-auto">
-                <button type="button" data-close="medibox" class="absolute right-4 top-4 text-gray-700 dark:text-white">Close ✕</button>
-                <h2 class="text-2xl font-semibold mb-3">MediBox — Automated Medicine Dispenser</h2>
+        <div id="modal-medibox" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-modal-fade-in">
+            <div class="modal-content bg-white dark:bg-gray-900 text-black dark:text-white h-screen w-screen rounded-none relative overflow-auto">
+                <!-- Sticky Header with Close Button -->
+                <div class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-Inter text-purple-600 dark:text-purple-400">MediBox</h2>
+                    <button type="button" data-close="medibox" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 font-Inter font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        Close
+                    </button>
+                </div>
+                
+                <!-- Modal Content -->
+                <div class="px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8 space-y-6 lg:space-y-8">
+                    <!-- Project Title and Subtitle -->
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-Inter mb-3 lg:mb-4">MediBox — Automated Medicine Dispenser</h1>
+                        <p class="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 font-Inter">
+                            An intelligent automated medicine dispensing system built with ESP32, featuring scheduled alarms, environment monitoring, light-based selection, and remote MQTT control for safe and reliable medication management.
+                        </p>
+                    </div>
 
-                <h3 class="font-semibold mt-4">Key Features</h3>
-                <ul class="list-disc ml-6 mb-4">
-                    <li><strong>Automated Medicine Dispensing:</strong> Servo-controlled dispenser that rotates to drop selected medicine doses based on light-guided selection and scheduling.</li>
-                    <li><strong>Scheduled Alarms & Reminders:</strong> Multi-alarm scheduler with NTP-based time sync, audible buzzer and LED notifications for medicine times; configurable alarms via onboard menu.</li>
-                    <li><strong>Environment Monitoring & Alerts:</strong> Real-time temperature and humidity sensing (DHT22) with visual warnings and display messages when thresholds are exceeded.</li>
-                    <li><strong>Light-based Selection & Control:</strong> Dual LDR sensors determine light-intensity and guide servo angle calculation for selective dispensing (supports multiple medicine slots).</li>
-                    <li><strong>Local UI & Controls:</strong> OLED display (SSD1306) + pushbutton menu for configuring timezone, alarms, and interacting with the device directly.</li>
-                    <li><strong>Remote Telemetry & Control (MQTT):</strong> Wi‑Fi connectivity and MQTT support (PubSubClient) to publish sensor data (temperature, humidity, light) and receive control topics for parameters like servo offsets.</li>
-                    <li><strong>Hardware Safety & Feedback:</strong> Buzzer, alarm LED, and fail-safe button (cancel) to stop alarms; temperature/humidity warning LEDs for immediate onsite alerts.</li>
-                    <li><strong>Simulation & Prototyping:</strong> Full Wokwi simulation files and circuit diagram included for easy prototyping and demonstration.</li>
-                </ul>
+                    <!-- Key Features -->
+                    <div>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 text-gray-800 dark:text-white">Key Features</h3>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 font-Inter text-sm sm:text-base leading-relaxed">
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Automated Medicine Dispensing:</strong> Servo-controlled dispenser with light-guided selection for precise medication delivery.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Scheduled Alarms & Reminders:</strong> Multi-alarm scheduler with NTP-based time sync and configurable notifications.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Environment Monitoring:</strong> Real-time temperature and humidity sensing (DHT22) with threshold-based visual warnings.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Light-based Selection:</strong> Dual LDR sensors for light-intensity detection and servo angle calculation for selective dispensing.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Local UI & Controls:</strong> OLED display (SSD1306) with pushbutton menu for timezone, alarm configuration, and device interaction.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Remote Telemetry (MQTT):</strong> Wi-Fi connectivity with MQTT support for sensor data publishing and remote control capabilities.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Hardware Safety & Feedback:</strong> Buzzer, alarm LED, and fail-safe button with temperature/humidity warning LEDs.</div>
+                            </li>
+                            <li class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div><strong>Simulation & Prototyping:</strong> Complete Wokwi simulation files and circuit diagrams for easy prototyping and demonstration.</div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <p class="mb-4 font-semibold">Tech Stack: ESP32 (Arduino/C++), Adafruit GFX & SSD1306, DHTesp, ESP32Servo, PubSubClient (MQTT), Wokwi simulation</p>
+                    <!-- Tech Stack -->
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-4 sm:p-6 rounded-xl">
+                        <h4 class="text-lg font-bold font-Inter mb-2 text-gray-800 dark:text-white">Tech Stack</h4>
+                        <p class="font-Inter font-medium text-gray-700 dark:text-gray-300">ESP32 (Arduino/C++), Adafruit GFX & SSD1306, DHTesp, ESP32Servo, PubSubClient (MQTT), Wokwi simulation</p>
+                    </div>
 
-                <h3 class="font-semibold mt-4">Gallery</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
-                    <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                        <img src="./images/projects/MediBox/image.png" alt="MediBox - OLED main screen" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
+                    <!-- Gallery -->
+                    <div>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold font-Inter mb-4 lg:mb-6 text-gray-800 dark:text-white">Gallery</h3>
+                        <div class="auto-grid gap-4 lg:gap-6">
+                            <div class="gallery-item">
+                                <img src="./images/projects/MediBox/image.png" alt="MediBox OLED main screen showing time and medicine schedule" class="gallery-image">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="./images/projects/MediBox/image-1.png" alt="MediBox internal hardware layout with ESP32 and sensors" class="gallery-image">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="./images/projects/MediBox/image-2.png" alt="MediBox servo dispensing mechanism in action" class="gallery-image">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="./images/projects/MediBox/image-3.png" alt="MediBox Wokwi simulation setup and circuit diagram" class="gallery-image">
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                        <img src="./images/projects/MediBox/image-1.png" alt="MediBox - internal hardware layout" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-                    </div>
-                    <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                        <img src="./images/projects/MediBox/image-2.png" alt="MediBox - servo dispensing action" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-                    </div>
-                    <div class="flex items-center justify-center bg-gray-50 dark:bg-darkHover rounded-md overflow-hidden p-2">
-                        <img src="./images/projects/MediBox/image-3.png" alt="MediBox - Wokwi simulation snapshot" class="max-h-40 sm:max-h-48 md:max-h-56 lg:max-h-64 w-auto">
-                    </div>
-                    
                 </div>
             </div>
         </div>
